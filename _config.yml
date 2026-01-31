@@ -13,8 +13,8 @@ title                    : "Claudio Meggio"
 title_separator          : "-"
 name                     : &name "Claudio Meggio"
 description              : &description "Making sense of messy data with clean code and a curious mind."
-url                      : https://claudm.github.io
-baseurl                  : ""
+url                      : https://claudio-me.github.io
+baseurl                  : /claudm.github.io
 repository               : "Claudio-Me/claudm.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
