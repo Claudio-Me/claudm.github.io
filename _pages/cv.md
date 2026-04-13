@@ -30,12 +30,12 @@ Developed computer vision model for automated battery detection in waste streams
 * Managed end-to-end image annotation workflow using Roboflow.
 * Collaborated with robotics team to ensure model outputs integrate seamlessly with robotic arm retrieval systems.
 
-**Data Scientist** -- Smart Data Factory, 2021
+**Research Assistantt** -- Free University of Bolzano, 2021
 
 Worked on the SALSA project, classifying climbing routes using clustering algorithms on data from sensors applied to climbing walls.
 
 * Implemented end-to-end data pipelines, from sensor data collection and cleaning to clustering analysis.
-* Reported results providing actionable insights for business optimization, leading to a revenue increase of 2%.
+* Reported results providing actionable insights for business optimization.
 * Shared mathematical and statistical expertise in IT/engineering team to guide data analysis.
 * Explored reinforcement learning algorithms, with focus on Q-learning.
 
