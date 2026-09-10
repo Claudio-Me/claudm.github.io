@@ -1,0 +1,38 @@
+{% include base_path %}
+
+{% if post.header.teaser %}
+  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% else %}
+  {% assign teaser = site.teaser %}
+{% endif %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<div class="blog-card">
+  <a href="{{ base_path }}{{ post.url }}" rel="permalink">
+    {% if teaser %}
+    <div class="blog-card__image">
+      <img src=
+        {% if teaser contains "://" %}
+          "{{ teaser }}"
+        {% else %}
+          "{{ teaser | prepend: "/images/" | prepend: base_path }}"
+        {% endif %}
+        alt="{{ post.title }}">
+    </div>
+    {% endif %}
+    <div class="blog-card__body">
+      <h2 class="blog-card__title">{{ title }}</h2>
+      {% if post.date %}
+      <p class="blog-card__date">{{ post.date | date: "%B %d, %Y" }}</p>
+      {% endif %}
+      {% if post.excerpt %}
+      <p class="blog-card__excerpt">{{ post.excerpt | markdownify | strip_html | truncatewords: 30 }}</p>
+      {% endif %}
+    </div>
+  </a>
+</div>

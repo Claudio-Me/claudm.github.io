@@ -1,0 +1,15 @@
+main:
+  - title: "Papers"
+    url: /papers/
+
+  - title: "Blog"
+    url: /blog/
+
+  - title: "CV"
+    url: /cv/
+
+  - title: "Projects"
+    url: /projects/
+
+  - title: "Hobbies"
+    url: /hobbies/
