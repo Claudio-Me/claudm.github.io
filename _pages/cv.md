@@ -50,7 +50,7 @@ Worked on the SALSA project, classifying climbing routes using clustering algori
 
 ## Skills
 
-* **Python** (advanced): Scikit-learn, pandas, XGBoost, PyTorch, TabPFN, YOLO, Hugging Face
+* **Python** (advanced): Scikit-learn, pandas, XGBoost, PyTorch, YOLO, Hugging Face
 * **Cloud Computing**: Google Cloud Platform, remote servers for ML training
 * **Git**: collaborative development
 * **SQL / Pandas**: data wrangling

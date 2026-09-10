@@ -1,6 +1,6 @@
 ---
 title: "Electricity Price Prediction: France vs Germany"
-excerpt: "QRT ENS Data Challenge 2023: Predicting daily electricity futures price variations using XGBoost and TabPFN."
+excerpt: "QRT ENS Data Challenge 2023: Predicting daily electricity futures price variations using XGBoost."
 collection: portfolio
 ---
 
@@ -13,7 +13,7 @@ collection: portfolio
 **Approach:**
 1. **Exploratory Data Analysis** - Understand data patterns and relationships
 2. **Feature Engineering** - Create domain-informed features
-3. **Modeling** - Compare XGBoost and TabPFN performance
+3. **Modeling** - Train and tune an XGBoost model
 
 ---
 
@@ -29,7 +29,7 @@ Understanding missing values helps inform preprocessing decisions. XGBoost handl
 
 **Observations — Missing Data:**
 - The only columns with missing values are `DE_NET_EXPORT` and `DE_NET_IMPORT` (and their FR counterparts), which is consistent with what we see in `X_train.head()`. This pattern likely reflects days when the exchange direction was zero or undefined (e.g., balanced import/export), rather than a data collection failure.
-- The missingness rate appears low (< 10%), so XGBoost's native ability to handle NaN values makes imputation unnecessary for tree-based models. However, if these features turn out to be informative, imputing with column means (available via `fill_nan_entries()` in preprocessing) could help models that cannot handle missing values natively (e.g., TabPFN).
+- The missingness rate appears low (< 10%), so XGBoost's native ability to handle NaN values makes imputation unnecessary for tree-based models. However, if these features turn out to be informative, imputing with column means (available via `fill_nan_entries()` in preprocessing) could help models that cannot handle missing values natively.
 
 ### 2. Target Variable Distribution
 
@@ -120,7 +120,7 @@ The preprocessing pipeline applies several domain-informed transformations to en
 
 The `data_preprocessing()` function accepts a `convert_categorical` parameter:
 - `True`: Converts COUNTRY to categorical (recommended for XGBoost)
-- `False`: Keeps COUNTRY as string (for TabPFN compatibility)
+- `False`: Keeps COUNTRY as string (for models that expect raw string columns)
 
 ---
 
@@ -135,12 +135,6 @@ We use 10-fold cross-validation with grid search to find optimal hyperparameters
 
 **Regularization note:** Strong L1/L2 penalties (`reg_alpha`, `reg_lambda`) are used to combat overfitting.
 
-### TabPFN
-
-[TabPFN](https://github.com/automl/TabPFN) is a transformer-based model pre-trained on synthetic tabular data. It offers strong out-of-the-box performance without hyperparameter tuning.
-
-To run this one we recommend running it on a GPU; if needed to be launched remotely on a server, a user can more easily run the script in `TabPFN.py`.
-
 ---
 
 ## Results
@@ -148,7 +142,6 @@ To run this one we recommend running it on a GPU; if needed to be launched remot
 | Model | CV Spearman | Holdout Spearman | Notes |
 |-------|-------------|------------------|-------|
 | **XGBoost** | 0.23 | ~0.15-0.18 | 10-fold CV with grid search |
-| **TabPFN** | - | ~0.18-0.23 | No hyperparameter tuning required |
 
 ## Key Findings
 
@@ -156,9 +149,7 @@ To run this one we recommend running it on a GPU; if needed to be launched remot
 
 2. **Country differences matter**: Germany and France show different patterns in energy production (notably nuclear), which affects model predictions differently
 
-3. **TabPFN outperforms XGBoost** on this dataset without requiring hyperparameter tuning, making it an efficient choice for tabular regression tasks
-
-4. **Overfitting challenge**: The gap between training and holdout performance indicates the model struggles to generalize, possibly due to temporal patterns not captured by the features
+3. **Overfitting challenge**: The gap between training and holdout performance indicates the model struggles to generalize, possibly due to temporal patterns not captured by the features
 
 ## Future Improvements
 
